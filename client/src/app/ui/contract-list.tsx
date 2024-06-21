@@ -1,6 +1,6 @@
 const ContractList = ({ children }: any) => {
     return (
-        <section className="container">
+        <section className="container d-flex flex-column gap-4">
             {children}
         </section>
     )

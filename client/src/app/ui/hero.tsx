@@ -15,7 +15,7 @@ const Hero = () => {
                     </div>
                 </div>
                 <div className="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-                    <Image className="rounded-lg-3" src="storyset_environmentalaudit_cuate.svg" alt="" width={760} height={480}></Image>
+                    <Image className="rounded-lg-3" src="storyset_environmentalaudit_cuate.svg" alt="" width={760} height={480} priority></Image>
                 </div>
             </div>
         </div>
