@@ -7,6 +7,7 @@ import "bootstrap-icons/font/bootstrap-icons.css"
 
 import NavBar from "@/app/ui/navbar"
 import Footer from "@/app/ui/footer"
+import { searchContractByResourceId } from '@/app/actions/search-contract'
 
 const inter = Inter({ subsets: ["latin"] })
 const atkinson = Atkinson_Hyperlegible({ weight: ['400', '700'], subsets: ["latin"] })
@@ -21,10 +22,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+
   return (
     <html lang="en">
       <body className={atkinson.className}>
-        <NavBar />
+        <NavBar searchContract={searchContractByResourceId} />
         {children}
         <Footer />
       </body>

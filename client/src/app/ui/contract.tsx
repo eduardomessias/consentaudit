@@ -25,13 +25,13 @@ const Contract = ({ contract }: IContractProps) => {
                         </div>
                     </div>
                     <div className="d-flex gap-1">
-                        {Date.now() > contract.expiration.getTime() ? (
+                        {Date.now() > contract.effectiveness.to.getTime() ? (
                             <div className="text-danger">
                                 <span><i className="bi bi-calendar-x"></i></span>
                                 &nbsp;
                                 Expired on
                                 &nbsp;
-                                <span>{contract.expiration.toLocaleString()}</span>
+                                <span>{contract.effectiveness.to.toLocaleString()}</span>
                             </div>
 
                         ) : (
@@ -40,7 +40,7 @@ const Contract = ({ contract }: IContractProps) => {
                                 &nbsp;
                                 Expires on
                                 &nbsp;
-                                <span>{contract.expiration.toLocaleString()}</span>
+                                <span>{contract.effectiveness.to.toLocaleString()}</span>
                             </div>
                         )}
                     </div>

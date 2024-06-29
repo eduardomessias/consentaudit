@@ -4,9 +4,12 @@
 import NavLink from '@/app/ui/navlink'
 import { links } from '@/app/data/links'
 import INavLink from '@/app/lib/interfaces/navlink.interface'
+import SearchContract from './search-contract'
+import INavbarProps from '@/app/lib/interfaces/navbar.props.interface'
 
 
-const NavBar = () => {
+const NavBar = ({ searchContract }: INavbarProps) => {
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <div className="container-fluid">
@@ -20,10 +23,7 @@ const NavBar = () => {
                             <NavLink key={`nav-link-${navlink.href}`} href={navlink.href} label={navlink.label} />
                         ))}
                     </ul>
-                    <form className="d-flex w-50">
-                        <input className="form-control me-2" type="search" placeholder="Resource identification" aria-label="Search"></input>
-                        <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <SearchContract searchByResource={searchContract} />
                 </div>
             </div>
         </nav>

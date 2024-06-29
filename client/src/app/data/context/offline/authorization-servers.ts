@@ -1,4 +1,4 @@
-import AuthorizationServer from '@/app/lib/classes/authorizationServer.class'
+import AuthorizationServer from '@/app/lib/classes/authorization-server.class'
 
 
 export const authorizationServers = [

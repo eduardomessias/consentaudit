@@ -1,4 +1,4 @@
-import IAuthorizationServer from '@/app/lib/interfaces/authorizationServer.interface'
+import IAuthorizationServer from '@/app/lib/interfaces/authorization-server.interface'
 
 
 export default class AuthorizationServer implements IAuthorizationServer {

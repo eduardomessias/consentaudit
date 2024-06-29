@@ -1,10 +1,12 @@
-import IAuthorizationServer from '@/app/lib/interfaces/authorizationServer.interface'
+import IAuthorizationServer from '@/app/lib/interfaces/authorization-server.interface'
 import IScope from '@/app/lib/interfaces/scope.interface'
+import IEffectiveness from '@/app/lib/interfaces/effectiveness.interface'
 
 export default interface IContract {
     hash: string
+    resource: string
     client: string
     scope: IScope[]
-    expiration: Date
+    effectiveness: IEffectiveness
     authorizedBy: IAuthorizationServer
 }
