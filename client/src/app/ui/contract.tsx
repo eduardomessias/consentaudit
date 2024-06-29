@@ -4,6 +4,9 @@ import Link from 'next/link'
 import IContractProps from '@/app/lib/interfaces/contract.props.interface'
 
 
+import camelCase from '@/app/lib/utils/string-to-camel-case'
+
+
 const Contract = ({ contract }: IContractProps) => {
     return (
         <div className="card">
@@ -25,7 +28,7 @@ const Contract = ({ contract }: IContractProps) => {
                         </div>
                     </div>
                     <div className="d-flex gap-1">
-                        {Date.now() > contract.effectiveness.to.getTime() ? (
+                        {Date.now() > new Date(contract.effectiveness.to).getTime() ? (
                             <div className="text-danger">
                                 <span><i className="bi bi-calendar-x"></i></span>
                                 &nbsp;
@@ -52,7 +55,7 @@ const Contract = ({ contract }: IContractProps) => {
                 <ul>
                     {contract.scope.map((scope) => (
                         <li key={scope.content}>
-                            <span>{scope.permissions} {scope.content}</span>
+                            <span>{camelCase(scope.permissions)} {scope.content}</span>
                         </li>
                     ))}
                 </ul>

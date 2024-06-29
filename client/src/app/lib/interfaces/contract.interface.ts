@@ -9,4 +9,5 @@ export default interface IContract {
     scope: IScope[]
     effectiveness: IEffectiveness
     authorizedBy: IAuthorizationServer
+    //newFromSmartContract: (contract: any) => IContract
 }

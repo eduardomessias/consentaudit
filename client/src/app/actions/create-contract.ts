@@ -1,10 +1,6 @@
 'use server'
 
 
-import IContract from '@/app/lib/interfaces/contract.interface'
-import Contract from '@/app/lib/classes/contract.class'
-
-
 import stringToBytes32 from '@/app/lib/utils/string-to-bytes32'
 import utcToEpoch from '@/app/lib/utils/utc-to-epoch'
 
