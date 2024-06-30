@@ -14,9 +14,10 @@ export async function searchContractByResourceId(resourceId: string): Promise<IC
 
     const smartContract = new SmartContract()
     const consents = await smartContract.getConsents(resourceIdBytes32) || []
+
     const contracts = consents.map((consent: any) => {
         let contract = Contract.newFromSmartContract(consent)
-        //console.log('Consent -> Contract:', consent, contract)
+        console.log('Consent -> Contract:', consent, contract)
         return contract;
     }, [])
     return contracts
