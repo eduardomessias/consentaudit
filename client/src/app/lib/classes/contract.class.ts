@@ -34,16 +34,18 @@ export default class Contract implements IContract {
 
 
     static newFromSmartContract(contract: any): IContract {
-        let tag: string = bytes32ToString(contract.auth_server_tag)
-        let url: string = bytes32ToString(contract.auth_server_url)
+        //let hash = 
+        let tag: string = bytes32ToString(contract.auth_server_tag).replace(/\x00/g, '')
+        let url: string = bytes32ToString(contract.auth_server_url).replace(/\x00/g, '')
         let clientId = bytes32ToString(contract.client_id)
         let scope = Scope.splitFromString(bytes32ToString(contract.scope))
         let from = epochToUtc(contract.from)
         let to = epochToUtc(contract.to)
         let effectiveness = new Effectiveness(from, to)
-        let authorizationServer = authorizationServers.find((server: AuthorizationServer) => server.alias === tag && server.url === url)
+        let authorizationServer: IAuthorizationServer | undefined = AuthorizationServer.findByUrlAndAlias(authorizationServers, url, tag)
         if (!authorizationServer) {
             console.warn('Authorization server not found:', tag, url)
+            console.log('Creating new authorization server:', tag, url)
             authorizationServer = new AuthorizationServer(tag, url, tag)
         }
 

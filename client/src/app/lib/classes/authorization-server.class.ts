@@ -14,4 +14,8 @@ export default class AuthorizationServer implements IAuthorizationServer {
     resolveIcon(): string {
         return `bi bi-${this.alias}`
     }
+
+    static findByUrlAndAlias(authorizationServers: IAuthorizationServer[], url: string, alias: string): IAuthorizationServer | undefined {
+        return authorizationServers.find((s: IAuthorizationServer) => s.url === url && s.alias === alias)
+    }
 }
