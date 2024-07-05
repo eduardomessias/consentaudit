@@ -1,8 +1,37 @@
+'use client'
+
+
+import { useFormState } from 'react-dom'
+import { useFormStatus } from 'react-dom'
+
+
 import IConsentTestProps from '@/app/lib/interfaces/consent-test.props.interface'
 
-const ConsentTest = ({ createContract }: IConsentTestProps) => {
+
+const initialState: any = {
+    resourceIdentifier: '',
+    clientId: '',
+    authServerUrl: '',
+    authServerTag: '',
+    from: '',
+    to: '',
+    scope: '',
+    storeInBlockchain: false
+}
+
+
+function SubmitButton() {
+    const { pending } = useFormStatus()
     return (
-        <form action={createContract}>
+        <button type="submit" className="btn btn-primary" disabled={pending}>Submit</button>
+    )
+}
+
+
+const ConsentTest = ({ createContract }: IConsentTestProps) => {
+    const [state, action] = useFormState(createContract, initialState)
+    return (
+        <form action={action}>
             <div className="mb-3">
                 <label htmlFor="resource-id" className="form-label">Resource identifier</label>
                 <input type="text" className="form-control" id="resource-id" name='resource-id' aria-describedby="resourceIdHelp" required></input>
@@ -36,7 +65,7 @@ const ConsentTest = ({ createContract }: IConsentTestProps) => {
                 <input type="checkbox" className="form-check-input" id="store-in-blockchain" name='store-in-blockchain'></input>
                 <label className="form-check-label" htmlFor="store-in-blockchain">Save consent in the blockchain?</label>
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <SubmitButton />
         </form>
     )
 }

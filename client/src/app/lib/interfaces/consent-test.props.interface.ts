@@ -1,3 +1,3 @@
 export default interface IConsentTestProps {
-    createContract: (formData: FormData) => void
+    createContract: (formData: any) => void | Promise<void>
 }

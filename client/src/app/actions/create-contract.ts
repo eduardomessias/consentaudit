@@ -8,9 +8,10 @@ import utcToEpoch from '@/app/lib/utils/utc-to-epoch'
 import SmartContract from '@/app/lib/classes/smart-contract.class'
 import Scope from '@/app/lib/classes/scope.class'
 import IScope from '@/app/lib/interfaces/scope.interface'
+import { revalidatePath } from 'next/cache'
 
 
-export async function createContract(formData: FormData) {
+export async function createContract(previousState: any, formData: FormData): Promise<any> {
     console.log('Creating contract...', formData)
 
     // data extraction
@@ -45,7 +46,16 @@ export async function createContract(formData: FormData) {
         return
     }
 
-    // contract creation
-    let smartContract = new SmartContract()
-    console.log(await smartContract.grantConsent(resourceIdentifier, clientId, authServerUrl, authServerTag, from, to, scope))
+    try {
+        // contract creation
+        let smartContract = new SmartContract()
+        let transaction = await smartContract.grantConsent(resourceIdentifier, clientId, authServerUrl, authServerTag, from, to, scope)
+        console.log(transaction)
+
+        revalidatePath('/application/authorization/consent/test')
+        return { transaction }
+    } catch (error) {
+        console.error('Error creating contract', error)
+        return { error }
+    }
 }

@@ -1,6 +1,5 @@
 import IAuthorizationServer from '@/app/lib/interfaces/authorization-server.interface'
 
-
 export default class AuthorizationServer implements IAuthorizationServer {
     company: string
     url: string

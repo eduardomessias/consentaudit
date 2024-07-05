@@ -9,4 +9,11 @@ export default class Scope implements IScope {
         this.content = content
         this.permissions = permissions
     }
+
+    static splitFromString(scope: string): IScope[] {
+        return scope.split(',').map((scope: string) => {
+            let [permissions, content] = scope.split(':')
+            return new Scope(content, permissions)
+        }, [])
+    }
 }
