@@ -5,13 +5,9 @@ import IEffectiveness from '@/app/lib/interfaces/effectiveness.interface'
 import Scope from '@/app/lib/classes/scope.class'
 import Effectiveness from '@/app/lib/classes/effectiveness.class'
 import AuthorizationServer from '@/app/lib/classes/authorization-server.class'
-
 import { authorizationServers } from '@/app/data/context/offline/authorization-servers'
-
 import bytes32ToString from '@/app/lib/utils/bytes32-to-string'
 import epochToUtc from '@/app/lib/utils/epoch-to-utc'
-
-
 
 
 export default class Contract implements IContract {
@@ -43,12 +39,7 @@ export default class Contract implements IContract {
         let to = epochToUtc(contract.to)
         let effectiveness = new Effectiveness(from, to)
         let authorizationServer: IAuthorizationServer | undefined = AuthorizationServer.findByUrlAndAlias(authorizationServers, url, tag)
-        if (!authorizationServer) {
-            console.warn('Authorization server not found:', tag, url)
-            console.log('Creating new authorization server:', tag, url)
-            authorizationServer = new AuthorizationServer(tag, url, tag)
-        }
-
+            || new AuthorizationServer(tag, url, tag)
         return new Contract('', '', clientId, scope, effectiveness, authorizationServer)
     }
 }

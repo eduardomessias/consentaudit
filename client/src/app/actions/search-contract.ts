@@ -10,16 +10,9 @@ import { redirect } from 'next/navigation'
 
 export async function searchContractByResourceId(resourceId: string): Promise<IContract[]> {
     let resourceIdBytes32 = stringToBytes32(resourceId)
-    console.log('Searching contract by resource ID:', resourceId, `(${resourceIdBytes32})`)
-
     const smartContract = new SmartContract()
     const consents = await smartContract.getConsents(resourceIdBytes32) || []
-
-    const contracts = consents.map((consent: any) => {
-        let contract = Contract.newFromSmartContract(consent)
-        console.log('Consent -> Contract:', consent, contract)
-        return contract;
-    }, [])
+    const contracts = consents.map((consent: any) => Contract.newFromSmartContract(consent), [])
     return contracts
 }
 

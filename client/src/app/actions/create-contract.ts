@@ -22,7 +22,6 @@ export async function createContract(previousState: any, formData: FormData): Pr
     let from: number = utcToEpoch(new Date(formData.get('from')?.toString() || new Date()))
     let to: number = utcToEpoch(new Date(formData.get('to')?.toString() || new Date()))
     let scope: string = stringToBytes32(formData.get('scope')?.toString() || '')
-
     let storeInBlockchain: boolean = formData.get('store-in-blockchain') === 'on'
 
     // data transformation

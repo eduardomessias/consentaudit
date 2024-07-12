@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { links } from '@/app/data/links'
+import { links } from '@/app/data/context/offline/links'
 import INavLink from '@/app/lib/interfaces/navlink.interface'
 
 

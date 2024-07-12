@@ -1,3 +1,6 @@
+import Link from 'next/link'
+
+
 import ConsentTest from '@/app/ui/consent-test'
 import { createContract } from '@/app/actions/create-contract'
 
@@ -9,7 +12,14 @@ const Page = async () => {
             <div className="row">
                 <div className="col">
 
-                    <h5>Consent request test</h5>
+                    <ul className="nav nav-pills">
+                        <li className="nav-item">
+                            <Link className="nav-link" href="/application/registry">Application registry</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" href='/application/authorization/consent/test'>Test consent request</Link>
+                        </li>
+                    </ul>
 
                 </div>
             </div>

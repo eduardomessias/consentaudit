@@ -8,7 +8,9 @@ export default class ClientRepository {
         console.log('Saving client...', client)
         // save client to the database
         prisma.client.create({
-            data: {}
+            data: {
+                salt: client.salt,
+            }
         }).then((_client) => {
             console.log('Client saved', _client)
             client.id = _client.id

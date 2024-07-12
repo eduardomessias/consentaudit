@@ -1,5 +1,6 @@
 import NavLink from '@/app/lib/classes/navlink.class'
 
+
 export const links = [
     new NavLink('/audit', 'Audit consent contract'),
     new NavLink('/application/registry', 'Register client application'),

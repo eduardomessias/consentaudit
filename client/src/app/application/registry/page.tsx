@@ -3,16 +3,23 @@ import Link from "next/link"
 
 import { createClientApplication } from '@/app/actions/create-client-application'
 import RegisterClientApplication from '@/app/ui/register-client-application'
+import ClientApplicationList from '@/app/ui/client-application-list'
 
 
 const Page = async () => {
-
     return (
         <main className="container mt-4">
             <div className="row">
                 <div className="col">
 
-                    <h5>Application registry</h5>
+                    <ul className="nav nav-pills">
+                        <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" href="/applicaton/registry">Application registry</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" href='/application/authorization/consent/test'>Test consent request</Link>
+                        </li>
+                    </ul>
 
                 </div>
             </div>
@@ -26,7 +33,7 @@ const Page = async () => {
             <div className="row">
                 <div className="col">
 
-                    <Link href='/application/authorization/consent/test'>Test consent request</Link>
+                    <ClientApplicationList />
 
                 </div>
             </div>

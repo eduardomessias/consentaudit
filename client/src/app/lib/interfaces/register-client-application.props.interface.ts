@@ -1,3 +1,3 @@
 export default interface IRegisterClientApplicationProps {
-    createClientApplication: (formData: FormData) => void
+    createClientApplication: (previousState: any, formData: FormData) => void
 }

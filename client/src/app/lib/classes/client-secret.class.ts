@@ -7,27 +7,28 @@ import IClientSecret from '@/app/lib/interfaces/client-secret.interface'
 
 export default class ClientSecret implements IClientSecret {
     id: string
+    salt: string
     secret: string
     createdAt: Date
     updatedAt: Date
 
-    constructor(clientId: string) {
+
+    constructor(clientId: string, salt: string) {
         this.id = uuidv4()
+        this.salt = salt
         this.secret = this.newSecret(clientId)
         this.createdAt = new Date();
         this.updatedAt = new Date();
     }
 
+
     newSecret(clientId: string): string {
         try {
-            // generate a random salt
-            let salt = createHash('sha256').update(clientId).digest('hex')
-
-            // hash the name and url to create a unique client secret
+            // hash the client id to create a unique client secret
             let secret = createHash('sha256').update(clientId).digest('hex')
 
             // hash
-            let hash = pbkdf2Sync(secret, salt, 100000, 64, 'sha512')
+            let hash = pbkdf2Sync(secret, this.salt, 100000, 64, 'sha512')
 
             return hash.toString('hex')
         } catch (error) {

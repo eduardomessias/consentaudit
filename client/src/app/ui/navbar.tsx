@@ -2,7 +2,7 @@
 
 
 import NavLink from '@/app/ui/navlink'
-import { links } from '@/app/data/links'
+import { links } from '@/app/data/context/offline/links'
 import INavLink from '@/app/lib/interfaces/navlink.interface'
 import SearchContract from './search-contract'
 import INavbarProps from '@/app/lib/interfaces/navbar.props.interface'
