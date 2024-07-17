@@ -22,11 +22,16 @@ export async function createClientApplication(previousState: any, formData: Form
 
     try {
         const client = await ClientRepository.save(new Client())
-        const clientSecret = await ClientSecretRepository.save(new ClientSecret(client.id, client.salt))
+        ClientSecretRepository.save(new ClientSecret(client.id, client.salt))
         const clientApplication = await ClientApplicationRepository.save(new ClientApplication(client.id, name, callback))
 
         console.log('Client application created', clientApplication)
         revalidatePath('/application/registry')
+        return {
+            id: clientApplication.id,
+            name: clientApplication.name,
+            callback: clientApplication.callback,
+        }
     } catch (error) {
         console.error('Error creating client application', error)
         throw error

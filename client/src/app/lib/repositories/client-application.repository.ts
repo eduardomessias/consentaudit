@@ -25,4 +25,28 @@ export default class ClientApplicationRepository {
             resolve(clientApplication)
         })
     }
+
+
+    static findMany(): Promise<IClientApplication[]> {
+        return prisma.clientApplication
+            .findMany()
+            .then((_clientApplications) => {
+                return _clientApplications.map((clientApplication) => {
+                    return {
+                        id: clientApplication.clientId,
+                        name: clientApplication.name,
+                        callback: clientApplication.callback,
+                        clientId: clientApplication.clientId,
+                        authorizationServers: [],
+                        createdAt: clientApplication.createdAt.getTime(),
+                        updatedAt: clientApplication.updatedAt.getTime()
+                    }
+                }, [])
+            }).catch((error) => {
+                throw error
+            })
+            .finally(() => {
+                return []
+            })
+    }
 }
