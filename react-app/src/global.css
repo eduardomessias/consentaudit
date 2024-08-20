@@ -1,0 +1,18 @@
+/* src/index.css or src/styles/global.scss */
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+
+
+/* src/index.css or src/styles/global.scss */
+body {
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+}
+
+.header {
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-weight: 700;
+}
+
+.text {
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-weight: 400;
+}

@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id        String   @id @default(uuid())
+  salt      String
+  creatdAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  oauthConnections ClientOAuthConnections[]
+}
+
+model ClientSecret {
+  id        String   @id @default(uuid())
+  secret    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ClientApplication {
+  id        String   @id @default(uuid())
+  name      String
+  clientId  String
+  callback  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ClientOAuthConnections {
+  id                String   @id @default(uuid())
+  oauthClientId     String
+  oauthClientSecret String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  Client        Client?      @relation(fields: [clientId], references: [id])
+  clientId      String?
+  OAuthServer   OAuthServer? @relation(fields: [oAuthServerId], references: [id])
+  oAuthServerId String?
+}
+
+model OAuthServer {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  oauthConnections ClientOAuthConnections[]
+}

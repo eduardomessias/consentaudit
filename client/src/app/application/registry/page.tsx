@@ -1,3 +1,6 @@
+import { FC } from 'react'
+
+
 import Link from 'next/link'
 
 
@@ -13,43 +16,41 @@ import IClientApplication from '@/app/lib/interfaces/client-application.interfac
 import ClientApplicationRepository from '@/app/lib/repositories/client-application.repository'
 
 
-const Page = async () => {
+const Page: FC = async () => {
     const clientApplications: IClientApplication[] = await ClientApplicationRepository.findMany()
 
-    return (
-        <main className="container mt-4">
-            <div className="row">
-                <div className="col">
+    return <main className="container mt-4">
+        <div className="row">
+            <div className="col">
 
-                    <ul className="nav nav-pills">
-                        <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" href="/applicaton/registry">Application registry</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" href='/application/authorization/consent/test'>Test consent request</Link>
-                        </li>
-                    </ul>
+                <ul className="nav nav-pills">
+                    <li className="nav-item">
+                        <Link className="nav-link active" aria-current="page" href="#">Application registry</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" href='/application/authorization/consent/test'>Test consent request</Link>
+                    </li>
+                </ul>
 
-                </div>
             </div>
-            <div className="row">
-                <div className="col">
+        </div>
+        <div className="row">
+            <div className="col">
 
-                    <RegisterClientApplication createClientApplication={createClientApplication} />
+                <RegisterClientApplication createClientApplication={createClientApplication} />
 
-                </div>
             </div>
-            <div className="row">
-                <div className="col">
+        </div>
+        <div className="row">
+            <div className="col">
 
-                    <Suspense>
-                        <ClientApplicationList clientApplications={clientApplications} />
-                    </Suspense>
+                <Suspense>
+                    <ClientApplicationList clientApplications={clientApplications} />
+                </Suspense>
 
-                </div>
             </div>
-        </main>
-    )
+        </div>
+    </main>
 }
 
 

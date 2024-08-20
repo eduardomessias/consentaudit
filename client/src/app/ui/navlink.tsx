@@ -12,7 +12,7 @@ const NavLink = ({ href, label }: INavLink) => {
     const pathname = usePathname()
     return (
         <li className="nav-item">
-            <Link href={href} className={clsx('nav-link', { active: pathname === href })}>{label}</Link>
+            <Link href={pathname === href ? href : '#'} className={clsx('nav-link', { active: pathname === href })}>{label}</Link>
         </li>
     )
 }
