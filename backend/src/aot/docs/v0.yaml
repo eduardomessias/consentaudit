@@ -1,0 +1,71 @@
+openapi: 3.0.0
+info:
+  title: 'Consent Audit - API Documentation'
+  version: '0.0.1'
+  description: 'Consent Audit Backend Services API Documentation'
+  contact:
+    name: 'Eduardo Messias'
+    email: 'eduardo.messias@outlook.com'
+servers:
+  - url: 'http://localhost:5555'
+    description: 'Backend Local Server'
+  - url: 'https://consent-audit.herokuapp.com'
+    description: 'Backend Production Server'
+paths:
+  /api/v0/:
+    get:
+      summary: 'Hello World'
+      description: 'Hello World'
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '/api/v0/'
+        '400':
+          description: 'Bad Request'
+        '500':
+          description: 'Internal Server Error'
+
+  /api/v0/user:
+    post:
+      summary: 'Create User'
+      description: 'Create User'
+      parameters:
+        - in: 'body'
+          name: 'body'
+          description: 'User object that needs to be added'
+          required: true
+          schema:
+            type: 'object'
+            properties:
+              name:
+                type: 'string'
+                example: 'Eduardo Messias'
+              email:
+                type: 'string'
+                example: 'eduardo.messias@outlook.com'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: 'object'
+              properties:
+                name:
+                  type: 'string'
+                  example: 'Eduardo Messias'
+                email:
+                  type: 'string'
+                  example: 'eduardo.messias@outlook.com'
+      responses:
+        '201':
+          description: 'Successful operation'
+        '400':
+          description: 'Bad Request'
+        '500':
+          description: 'Internal Server Error'
+              

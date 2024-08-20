@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Resource {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  resourceOwnerId String
+  ResourceOwner   ResourceOwner @relation(fields: [resourceOwnerId], references: [id])
+}
+
+model ResourceOwner {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  resources Resource[]
+  User      User?
+}
+
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  resourceOwnerId String        @unique
+  ResourceOwner   ResourceOwner @relation(fields: [resourceOwnerId], references: [id])
+  Tenant          Tenant?       @relation(fields: [tenantId], references: [id])
+  tenantId        String?
+}
+
+model Tenant {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String?
+
+  User              User[]
+  ClientApplication ClientApplication[]
+}
+
+model Client {
+  id        String   @id @default(uuid())
+  salt      String
+  creatdAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ClientApplication ClientApplication[]
+}
+
+model ClientApplication {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  callback  String
+
+  clientId String
+  Client   Client @relation(fields: [clientId], references: [id])
+
+  tenantId String?
+  Tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  credentialsId String?
+  Credentials   ClientCredentials? @relation(fields: [credentialsId], references: [id])
+
+  AuthorizationServers AuthorizationServer[]
+}
+
+model ClientCredentials {
+  id        String   @id @default(uuid())
+  secret    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ClientApplication ClientApplication[]
+}
+
+model AuthorizationServer {
+  id        String   @id @default(uuid())
+  name      String
+  uri       String
+  company   String
+  alias     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ClientApplication   ClientApplication? @relation(fields: [clientApplicationId], references: [id])
+  clientApplicationId String?
+}
